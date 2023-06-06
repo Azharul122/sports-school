@@ -7,15 +7,20 @@ import {
 } from "react-router-dom";
 import Home from './Components/Home/Home';
 import Common from './Components/Common/Common';
+import Instructor from './Components/Pages/Instructor/Instructor';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home></Home>,
+    element: <Common></Common>,
     children:[
       {
         path: "/",
-        element: <Common></Common>,
+        element: <Home></Home>,
+      },
+      {
+        path:"instructors",
+        element:<Instructor></Instructor>
       }
     ]
   },

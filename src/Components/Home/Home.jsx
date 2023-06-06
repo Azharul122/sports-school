@@ -6,9 +6,7 @@ import Footer from '../Common/Footer/Footer';
 const Home = () => {
     return (
         <div>
-            <Header></Header>
-            <Outlet></Outlet>
-            <Footer></Footer>
+           Home content
         </div>
     );
 };
