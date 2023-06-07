@@ -8,6 +8,8 @@ import {
 import Home from './Components/Home/Home';
 import Common from './Components/Common/Common';
 import Instructor from './Components/Pages/Instructor/Instructor';
+import Login from './Components/Pages/Login/Login';
+import Classes from './Components/Pages/Classes/Classes';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
       {
         path:"instructors",
         element:<Instructor></Instructor>
+      },
+      {
+        path:"classes",
+        element:<Classes></Classes>
+      },
+      {
+        path:"login",
+        element:<Login></Login>
       }
     ]
   },
