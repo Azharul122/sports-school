@@ -1,7 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaEye,FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
+    const showPassword=()=>{
+       document.getElementById("passwordInput").type="text";
+        document.getElementById("showPasswordIcon").classList.add("hidden")
+        document.getElementById("hidePasswordIcon").classList.remove("hidden")
+
+    }
+    const hidePassword=()=>{
+        document.getElementById("passwordInput").type="password";
+        document.getElementById("showPasswordIcon").classList.remove("hidden")
+        document.getElementById("hidePasswordIcon").classList.add("hidden")
+    }
     return (
         <div>
              <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
@@ -29,10 +41,16 @@ const Login = () => {
                         >
                             Password
                         </label>
-                        <input
-                            type="password"
-                            className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                       <div className="relative">
+                       <input
+                            type="password" id='passwordInput'
+                            className=" block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
+                        <FaEye id='showPasswordIcon' className='text-lg absolute top-[50%] right-5 -translate-y-1/2 cursor-pointer' onClick={showPassword}></FaEye>
+                        <FaEyeSlash id='hidePasswordIcon' className='text-lg absolute top-[50%] right-5 -translate-y-1/2 hidden cursor-pointer' onClick={hidePassword}></FaEyeSlash>
+                       </div>
+                        
+
                     </div>
                     <a
                         href="#"
