@@ -5,6 +5,7 @@ import Footer from '../Common/Footer/Footer';
 import Corousel from './Carousel/Corousel';
 import PopularClasses from './PopularClasses/PopularClasses';
 import PopularInstructors from './PopularInstructors/PopularInstructors';
+import Achievement from './Achievement/Achievement';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
           <Corousel></Corousel>
           <PopularClasses></PopularClasses>
           <PopularInstructors></PopularInstructors>
+          <Achievement></Achievement>
         </div>
     );
 };
