@@ -82,10 +82,10 @@ const Login = () => {
                     </button>
                 </div>
 
-                <p className="mt-8 text-xs font-light text-center text-gray-700">
+                <p className="mt-8 text-xs font-light text-center text-black">
                     {" "}
                     Don't have an account?{" "}
-                    <Link to={"/register"} className='text-green-500'> Sign Up</Link>
+                    <Link to={"/register"} className='text-green-500 font-bold'> Sign Up</Link>
                 </p>
             </div>
         </div>
