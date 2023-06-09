@@ -12,6 +12,7 @@ import Login from './Components/Pages/Login/Login';
 import Classes from './Components/Pages/Classes/Classes';
 import Register from './Components/Pages/Register/Register';
 import AuthProvider from './Components/Providers/AuthProvider';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path:"instructors",
-        element:<Instructor></Instructor>
+        element: <Instructor></Instructor>
       },
       {
         path:"classes",

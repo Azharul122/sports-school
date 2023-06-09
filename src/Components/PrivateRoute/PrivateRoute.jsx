@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { AuthContext } from "../PrivateRoute/PrivateRoute";
+
 import Spinner from "../Spinner/Spinner";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
