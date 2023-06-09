@@ -15,7 +15,11 @@ const Classes = () => {
       .then((data) => setClasses(data));
   }, []);
 
-  const handleClasses = (event,availableSeats) => {
+  const handleClasses = (event,clas) => {
+    event.preventDefault()
+    const {_id,availableSeats,image,className,instructorEmail,instructorName,price,status}=clas
+    const classItem={itemId: _id,image,availableSeats,className,email:user.email,price,status}
+    console.log(classItem)
     if (!user) {
       Swal.fire({
         position: "center",
@@ -26,14 +30,45 @@ const Classes = () => {
       });
       navigate("/login");
     //  ( <Navigate state={{ from: location }} to={"/login"} replace></Navigate>)
-    
+  
+ 
     }
     else{
-      console.log(availableSeats)
-      if(availableSeats==0){
-        event.currentTarget.disabled = true;
+      // console.log(availableSeats)
+      // if(availableSeats==0){
+      //   event.currentTarget.disabled = true;
         
-      }
+      // }
+
+      fetch("http://localhost:5000/selected-classes", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body:JSON.stringify(classItem)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        if(data.insertedId){
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Course selected",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        }
+        else{
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Try again",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        }
+      })
+
     }
   };
   // const {className,image}=[classes]
@@ -63,8 +98,8 @@ const Classes = () => {
               <div className="card-actions">
                 <button
                 disabled={clas.availableSeats===0}
-                  onClick={()=>handleClasses(event,clas.availableSeats)}
-                  className={`py-2 px-3 bg-slate-700 rounded ${clas.availableSeats===0?"bg-[rgba(0,0,0,0.3)]":""}`}
+                  onClick={()=>handleClasses(event,clas)}
+                  className={`py-2 px-3 bg-slate-700 rounded ${clas.availableSeats===0?"opacity-50":""}`}
                 >
                   Select
                 </button>

@@ -43,7 +43,9 @@ const Header = () => {
                 <Link to={"/"}>Home</Link>
                 <Link to={"/instructors"}>Instructors</Link>
                 <Link to={"/classes"}>Classes</Link>
-                <Link to={"/dashboard"}>Dashboard</Link>
+                {
+                  user && <Link to={"/dashboard"}>Dashboard</Link>
+                }
               </ul>
             </div>
             <a className=" normal-case text-xl">Sports Shcool</a>
@@ -53,7 +55,9 @@ const Header = () => {
               <Link to={"/"}>Home</Link>
               <Link to={"/instructors"}>Instructors</Link>
               <Link to={"/classes"}>Classes</Link>
-              <Link to={"/dashboard"}>Dashboard</Link>
+              {
+                  user && <Link to={"/dashboard"}>Dashboard</Link>
+                }
             </ul>
           </div>
           <div className="navbar-end">

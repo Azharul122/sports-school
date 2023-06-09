@@ -13,6 +13,9 @@ import Classes from './Components/Pages/Classes/Classes';
 import Register from './Components/Pages/Register/Register';
 import AuthProvider from './Components/Providers/AuthProvider';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Dashboard from './Components/Pages/Dashboard/Dashboard';
+import SelectedClasses from './Components/Pages/Dashboard/SelectedClasses/SelectedClasses';
+import EnrolledClasses from './Components/Pages/Dashboard/EnrolledClasses/EnrolledClasses';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,20 @@ const router = createBrowserRouter([
       {
         path:"register",
         element:<Register></Register>
+      },
+      {
+        path:"dashboard",
+        element:<Dashboard></Dashboard>,
+        children:[
+          {
+            path:"selected-classes",
+            element:<SelectedClasses></SelectedClasses>
+          },
+          {
+            path:"enrolled-classes",
+            element:<EnrolledClasses></EnrolledClasses>
+          }
+        ]
       }
     ]
   },
