@@ -1,8 +1,57 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaEye,FaEyeSlash } from 'react-icons/fa';
-
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 const Login = () => {
+
+    const navigate = useNavigate()
+    const { signIn } = useContext(AuthContext)
+    console.log(signIn)
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/"
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = (data,event) => {
+        event.preventDefault();
+        signIn(data.email,data.password)
+        .then(result => {
+          const loggeduser = result.user;
+          navigate(from)
+          console.log(loggeduser)
+        })
+        .catch(error => {
+          const errorMessage = error.message;
+          // console.log(errorMessage)
+  
+        })
+        console.log(data.password)
+      };
+
+      const auth = getAuth();
+      const googleProvider = new GoogleAuthProvider();
+      const nevigate = useNavigate();
+    
+      const handleGoogleSignUp = () => {
+        signInWithPopup(auth, googleProvider)
+          .then((result) => {
+            const user = result.user;
+            navigate(from)
+          })
+          .then((error) => {
+            console.log(error);
+          });
+      };
+      
+
+
+
+
+
+
+
+
     const showPassword=()=>{
        document.getElementById("passwordInput").type="text";
         document.getElementById("showPasswordIcon").classList.add("hidden")
@@ -21,36 +70,41 @@ const Login = () => {
                 <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
                     Sign in
                 </h1>
-                <form className="mt-6">
+                <form className="mt-6 " onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-2">
                         <label
-                            for="email"
+                            htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Email
                         </label>
                         <input
-                            type="email"
+                            type="email"  {...register("email", { required: true })}
                             className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
+                {errors.email?.type==="required" && <p className='text-red-600'>Email is required</p>}
+
                     </div>
                     <div className="mb-2">
                         <label
-                            for="password"
+                            htmlFor="password"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Password
                         </label>
                        <div className="relative">
                        <input
-                            type="password" id='passwordInput'
+                            type="password" id='passwordInput' {...register("password", { required: true,minLength:6,pattern:/^[a-z0-9]+$/ })}
                             className=" block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
+
                         <FaEye id='showPasswordIcon' className='text-lg absolute top-[50%] right-5 -translate-y-1/2 cursor-pointer' onClick={showPassword}></FaEye>
                         <FaEyeSlash id='hidePasswordIcon' className='text-lg absolute top-[50%] right-5 -translate-y-1/2 hidden cursor-pointer' onClick={hidePassword}></FaEyeSlash>
                        </div>
                         
-
+                       {errors.password?.type==="required" && <p className='text-red-600'>Password is required</p>}
+                    {errors.password?.type==="minLength" && <p className='text-red-600 w-full'>Password must be grater than 6 charcters</p>}
+                    {errors.password?.type==="pattern" && <p className='text-red-600 w-full'>Password must not be exist  any special charcters or capital letters</p>}
                     </div>
                     <a
                         href="#"
@@ -69,6 +123,7 @@ const Login = () => {
                 </div>
                 <div className="flex mt-4 gap-x-2">
                     <button
+                    onClick={handleGoogleSignUp}
                         type="button"
                         className="flex items-center justify-center w-full p-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-violet-600"
                     >

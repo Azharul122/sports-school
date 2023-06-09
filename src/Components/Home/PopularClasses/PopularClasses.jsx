@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
-
+// https://as-12.vercel.app/classes/
 const PopularClasses = () => {
     const [classes,setClasses]=useState([]);
     useEffect(()=>{

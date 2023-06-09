@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from '../Common/Header/Header';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Common/Footer/Footer';
@@ -6,8 +6,11 @@ import Corousel from './Carousel/Corousel';
 import PopularClasses from './PopularClasses/PopularClasses';
 import PopularInstructors from './PopularInstructors/PopularInstructors';
 import Achievement from './Achievement/Achievement';
+import AuthProvider, { AuthContext } from '../Providers/AuthProvider';
 
 const Home = () => {
+  const {user}=useContext(AuthContext)
+  console.log(user)
     return (
         <div>
           <Corousel></Corousel>
