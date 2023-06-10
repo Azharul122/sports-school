@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const ManageClasses = () => {
   const { user } = useContext(AuthContext);
@@ -9,6 +10,51 @@ const ManageClasses = () => {
     return result.json();
   });
 
+  //make approve
+const makeApprove=(id)=>{
+  // fetch("") instructor
+  fetch(`http://localhost:5000/classes/approve/${id}`,{
+    method:"PATCH"
+
+})
+.then(res=>res.json())
+.then(data=>{
+    if(data.modifiedCount)
+    {
+        refetch();   
+Swal.fire({
+position: 'center',
+icon: 'success',
+title: `Class Approved`,
+showConfirmButton: false,
+timer: 1500
+})
+    }
+})
+
+}
+// Make denie
+const makeDenie=(id)=>{
+  // fetch("") instructor
+  fetch(`http://localhost:5000/classes/deny/${id}`,{
+    method:"PATCH"
+
+})
+.then(res=>res.json())
+.then(data=>{
+    if(data.modifiedCount)
+    {
+        refetch();   
+Swal.fire({
+position: 'center',
+icon: 'success',
+title: `Class Denied`,
+showConfirmButton: false,
+timer: 1500
+})
+    }
+})
+}
   return (
     <div className="w-full md:w-[90%] mx-auto">
       <section>
@@ -61,13 +107,13 @@ const ManageClasses = () => {
                   <td>${sclass.price}</td>
                   <td>
                   
-                  <button className="bg-stone-500 text-white p-1">
+                  <button  className="bg-stone-500 text-white p-1">
                       Pending
                     </button>{" "}
-                    <button className="text-white bg-green-500 p-1">
+                    <button disabled={sclass.status=="approved"} onClick={()=>makeApprove(sclass._id)} className={`text-white bg-green-500 p-1 ${sclass.status=="approved" ?"opacity-50":""}`}>
                       Approve
                     </button> {" "}
-                    <button className="text-white bg-red-500 p-1">
+                    <button disabled={sclass.status=="denied"} onClick={()=>makeDenie(sclass._id)} className={`text-white bg-red-500 p-1 ${sclass.status=="denied" ?"opacity-50":""}`}>
                       Deny
                     </button>
          
