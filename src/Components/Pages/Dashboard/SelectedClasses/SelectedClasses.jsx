@@ -99,7 +99,7 @@ const handleDelete=(classes)=>{
     <section>
                 <div className="flex text-right  justify-between items-center pt-6 text-white">
                     <div className="flex gap-2">
-                    <p><b>Selected classws: </b>{userClasses.length}</p>
+                    <p><b>Selected classes: </b>{userClasses.length}</p>
                     <p><b>Total price: </b>${userClasses.reduce((sum,item)=>item.price+sum,0).toFixed(2)}</p>
                     </div>
                     <button className='px-2 py-1  bg-slate-500'>process to pay</button>

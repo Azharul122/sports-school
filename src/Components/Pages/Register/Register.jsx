@@ -26,7 +26,7 @@ const Register = () => {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const user = result.user;
-                const saveUser = {name: user.displayName, email:user.email, phot:user.photoURL };
+                const saveUser = {name: user.displayName, email:user.email, photoURL:user.photoURL,role:"Student" };
                     fetch(`http://localhost:5000/users`, {
                         method: "POST",
                         headers: {
@@ -47,7 +47,7 @@ const Register = () => {
                             });
                         }
                     });//then data
-                    
+
                // nevigate("/");
             })
             .then((error) => {
@@ -75,7 +75,7 @@ const Register = () => {
             .then((result) => {
                 const createdUser = result.user;
                 updateUserProfile(name, photoURL).then(() => {
-                    const saveUser = { name, email, photoURL, password };
+                    const saveUser = { name, email, photoURL, role:"Student" };
                     fetch(`http://localhost:5000/users`, {
                         method: "POST",
                         headers: {

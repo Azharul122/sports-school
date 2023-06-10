@@ -12,7 +12,7 @@ const ManageClasses = () => {
   return (
     <div className="w-full md:w-[90%] mx-auto">
       <section>
-        <div className="flex text-right  justify-between items-center pt-6 text-white">
+        <div className="flex text-right  justify-between items-center pb-6 text-white">
           <div className="flex gap-2">
             <p>
               <b>Total Classes: </b>
@@ -23,8 +23,8 @@ const ManageClasses = () => {
         </div>
       </section>
 
-      <div className="overflow-x-auto w-full">
-        <table className="table table-xs  w-full">
+      <div className="overflow-x-auto">
+        <table className="table overflow-x-auto table-xs w-full">
           {/* head */}
           <thead>
             <tr className="text-center">
@@ -37,6 +37,7 @@ const ManageClasses = () => {
               <th className="text-white font-bold">Avilable Sheets</th>
               <th className="text-white font-bold">Price</th>
               <th className="text-white font-bold">Stutus</th>
+              <th className="text-white font-bold">Feaddback</th>
             </tr>
           </thead>
           <tbody>
@@ -70,6 +71,11 @@ const ManageClasses = () => {
                       Deny
                     </button>
          
+                  </td>
+                  <td>
+                  <button className="text-white bg-red-500 p-1">
+                      FeadBack
+                    </button>
                   </td>
                 </tr>
               ))}

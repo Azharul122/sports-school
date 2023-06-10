@@ -3,6 +3,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../../../Providers/AuthProvider';
 import { FaTrash } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
     const {user}=useContext(AuthContext)
@@ -11,6 +12,48 @@ const ManageUsers = () => {
     const result=await fetch("http://localhost:5000/users/")
     return result.json()
     })
+
+    const makeInstructor=(id,name)=>{
+        // fetch("") instructor
+        fetch(`http://localhost:5000/instructor/users/${id}`,{
+            method:"PATCH"
+
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.modifiedCount)
+            {
+                refetch();   
+Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: `${name} instructor now`,
+    showConfirmButton: false,
+    timer: 1500
+  })
+            }
+        })
+    }
+    const makeAdmin=(id,name)=>{
+        fetch(`http://localhost:5000/admin/users/${id}`,{
+            method:"PATCH"
+
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.modifiedCount)
+            {
+                refetch();   
+Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: `${name} admin now`,
+    showConfirmButton: false,
+    timer: 1500
+  })
+            }
+        })
+    }
     return (
         <div className='w-full md:w-[90%] mx-auto'>
                 <section>
@@ -30,8 +73,8 @@ const ManageUsers = () => {
       <tr>
       <th className='text-white font-bold'>SN.</th>
         <th className='text-white font-bold'>Name</th>
-        <th className='text-white font-bold'>image</th>
-        <th className='text-white font-bold'>Avilable Sheets</th>
+        <th className='text-white font-bold'>Email</th>
+        <th className='text-white font-bold'>Image</th>
         <th className='text-white font-bold'>Role</th>
         
       </tr>
@@ -45,7 +88,7 @@ const ManageUsers = () => {
     <td>{sclass.name}</td>
     <td>{sclass.email}</td>
     <td><img src={sclass.photoURL} alt=""  className='h-[40px] w-[40px]'/></td>
-    <td><button className='bg-stone-500 text-white p-1'>Instructor</button> <button className='text-white bg-slate-500 p-1'>Admin</button></td>
+    <td><button disabled={sclass.role=="instructor"} onClick={()=>makeInstructor(sclass._id,sclass.name)} className='bg-stone-500 text-white p-1'>Instructor</button> <button disabled={sclass.role=="admin"}  onClick={()=>makeAdmin(sclass._id,sclass.name)} className='text-white bg-slate-500 p-1'>Admin</button></td>
   </tr>
     )
 
