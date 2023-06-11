@@ -11,49 +11,62 @@ const ManageClasses = () => {
   });
 
   //make approve
-const makeApprove=(id)=>{
-  // fetch("") instructor
-  fetch(`http://localhost:5000/classes/approve/${id}`,{
-    method:"PATCH"
-
-})
-.then(res=>res.json())
-.then(data=>{
-    if(data.modifiedCount)
-    {
-        refetch();   
-Swal.fire({
-position: 'center',
-icon: 'success',
-title: `Class Approved`,
-showConfirmButton: false,
-timer: 1500
-})
-    }
-})
-
-}
-// Make denie
-const makeDenie=(id)=>{
-  // fetch("") instructor
-  fetch(`http://localhost:5000/classes/deny/${id}`,{
-    method:"PATCH"
-
-})
-.then(res=>res.json())
-.then(data=>{
-    if(data.modifiedCount)
-    {
-        refetch();   
-Swal.fire({
-position: 'center',
-icon: 'success',
-title: `Class Denied`,
-showConfirmButton: false,
-timer: 1500
-})
-    }
-})
+  const makeApprove = (id) => {
+    // fetch("") instructor
+    fetch(`http://localhost:5000/classes/approve/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Class Approved`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+  // Make denie
+  const makeDenie = (id) => {
+    // fetch("") instructor
+    fetch(`http://localhost:5000/classes/deny/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Class Denied`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+//   sent feadback
+const sentFeaddback=(id)=>{
+    (async () => {
+    const { value: text } = await Swal.fire({
+        input: 'textarea',
+        inputLabel: 'Message',
+        inputPlaceholder: 'Type your message here...',
+        inputAttributes: {
+          'aria-label': 'Type your message here'
+        },
+        showCancelButton: true
+      })
+      //update feadback here 
+       if (text) {
+        Swal.fire(text)
+      }
+    })()
 }
   return (
     <div className="w-full md:w-[90%] mx-auto">
@@ -90,7 +103,7 @@ timer: 1500
             {/* row 1 */}
             {user &&
               classes.map((sclass, index) => (
-                <tr>
+                <tr key={sclass._id}>
                   <td>{index + 1}</td>
                   <td>{sclass.className}</td>
                   <td>{sclass.instructorName}</td>
@@ -106,22 +119,40 @@ timer: 1500
                   <td>{sclass.availableSeats}</td>
                   <td>${sclass.price}</td>
                   <td>
-                  
-                  <button  className="bg-stone-500 text-white p-1">
+                    <button className="bg-stone-500 text-white p-1">
                       Pending
                     </button>{" "}
-                    <button disabled={sclass.status=="approved"} onClick={()=>makeApprove(sclass._id)} className={`text-white bg-green-500 p-1 ${sclass.status=="approved" ?"opacity-50":""}`}>
+                    <button
+                      disabled={sclass.status == "approved"}
+                      onClick={() => makeApprove(sclass._id)}
+                      className={`text-white bg-green-500 p-1 ${
+                        sclass.status == "approved" ? "opacity-50" : ""
+                      }`}
+                    >
                       Approve
-                    </button> {" "}
-                    <button disabled={sclass.status=="denied"} onClick={()=>makeDenie(sclass._id)} className={`text-white bg-red-500 p-1 ${sclass.status=="denied" ?"opacity-50":""}`}>
+                    </button>{" "}
+                    <button
+                      disabled={sclass.status == "denied"}
+                      onClick={() => makeDenie(sclass._id)}
+                      className={`text-white bg-red-500 p-1 ${
+                        sclass.status == "denied" ? "opacity-50" : ""
+                      }`}
+                    >
                       Deny
                     </button>
-         
                   </td>
                   <td>
-                  <button className="text-white bg-red-500 p-1">
+                    <button
+                      className="text-white bg-red-500 p-1"
+                      onClick={() => sentFeaddback(sclass._id)}
+                    >
                       FeadBack
                     </button>
+
+                    {/* You can open the modal using ID.showModal() method */}
+
+                 
+
                   </td>
                 </tr>
               ))}

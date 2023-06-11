@@ -88,7 +88,7 @@ Swal.fire({
     <td>{sclass.name}</td>
     <td>{sclass.email}</td>
     <td><img src={sclass.photoURL} alt=""  className='h-[40px] w-[40px]'/></td>
-    <td><button disabled={sclass.role=="instructor"} onClick={()=>makeInstructor(sclass._id,sclass.name)} className='bg-stone-500 text-white p-1'>Instructor</button> <button disabled={sclass.role=="admin"}  onClick={()=>makeAdmin(sclass._id,sclass.name)} className='text-white bg-slate-500 p-1'>Admin</button></td>
+    <td><button disabled={sclass.role=="instructor"} onClick={()=>makeInstructor(sclass._id,sclass.name)} className={`bg-stone-500 text-white p-1 ${sclass.role=="instructor" ? "opacity-50":""}`}>Instructor</button> <button disabled={sclass.role=="admin"}  onClick={()=>makeAdmin(sclass._id,sclass.name)} className={`text-white bg-slate-500 p-1 ${sclass.role=="admin" ? "opacity-50":""}`}>Admin</button></td>
   </tr>
     )
 
