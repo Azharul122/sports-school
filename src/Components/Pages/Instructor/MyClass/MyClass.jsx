@@ -11,19 +11,15 @@ const MyClass = () => {
     const result = await fetch("http://localhost:5000/classes/");
     return result.json();
   });
-// const [id,setId]=useState(null)
-//   const editeOpen = (sclass) => {
-//     document.getElementById("authentication-modal").classList.remove("hidden");
-//     document.getElementById("name").defaultValue = sclass.name;
-//     document.getElementById("avilableSheets").defaultValue =
-//       sclass.avilableSheets;
-//     document.getElementById("image").defaultValue = sclass.image;
-//     document.getElementById("price").defaultValue = sclass.price;
-//    //setId(sclass.id)
-//   };
-//   const hideModal = () => {
-//     document.getElementById("authentication-modal").classList.add("hidden");
-//   };
+const [id,setId]=useState(null)
+  const showFeaddback = (sclass) => {
+    document.getElementById("authentication-modal").classList.remove("hidden");
+    document.getElementById("feadbackCOntent").innerText=sclass.feadBack
+
+  };
+  const hideModal = () => {
+    document.getElementById("authentication-modal").classList.add("hidden");
+  };
 //   const updateClass = (event, sclass) => {
 //     event.preventDefault();
 //     const name = event.target.name.value;
@@ -94,7 +90,7 @@ const MyClass = () => {
   );
   //console.log(filterMtClasses);
   return (
-    <div className="w-full md:w-[90%] mx-auto">
+    <div className="w-full px-2">
       <section>
         <div className="flex text-right  justify-between items-center pb-6 text-white">
           <div className="flex gap-2">
@@ -120,9 +116,9 @@ const MyClass = () => {
               <th className="text-white font-bold">Avilable Sheets</th>
               <th className="text-white font-bold">Price</th>
               <th className="text-white font-bold">Stutus</th>
-
               <th className="text-white font-bold">Enrolled</th>
-              <th className="text-white font-bold">Action</th>
+              <th className="text-white font-bold">FeadBack</th>
+              <th className="text-white font-bold">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -151,18 +147,13 @@ const MyClass = () => {
                     {sclass.feadBack != "" && (
                       <button
                         className="text-white bg-red-500 p-1"
-                        onClick={() => sentFeaddback(sclass._id)}
+                        onClick={() => showFeaddback(sclass)}
                       >
                         FeadBack
                       </button>
                     )}
-                 <Link to={`update-class/${sclass._id}`}>   <FaEdit
-                    //   onClick={() => editeOpen(sclass)}
-                      data-modal-target="authentication-modal"
-                      data-modal-toggle="authentication-modal"
-                      className="text-green-500 text-xl cursor-pointer"
-                    ></FaEdit></Link>
-                    {/* <div className="flex justify-center">
+           
+                    <div className="flex justify-center">
                       <div
                         id="authentication-modal"
                         tabindex="-1"
@@ -193,91 +184,29 @@ const MyClass = () => {
                               <span className="sr-only">Close modal</span>
                             </button>
                             <div className="px-6 py-6 lg:px-8">
-                              <h3 className="mb-4 text-3xl font-medium text-gray-900 dark:text-white">
-                                Update Class
+                              <h3 className="mb-4 text-2xl font-medium text-gray-900 dark:text-white">
+                                Admin FeadBack
                               </h3>
                               <form
                                 className="space-y-6"
                                 action="#"
-                                onSubmit={(e) => updateClass(e, sclass)}
+                                
                               >
-                                <div>
-                                  <label
-                                    for="email"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                  >
-                                    Class Name
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="name"
-                                    id="name"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="name@company.com"
-                                    required
-                                  ></input>
-                                </div>
-                                <div>
-                                  <label
-                                    for="image"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                  >
-                                    Class Image
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="image"
-                                    id="image"
-                                    placeholder="Image"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required
-                                  ></input>
-                                </div>
-                                <div>
-                                  <label
-                                    for="avilableSheets"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                  >
-                                    Avilable Sheetsd
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="avilableSheets"
-                                    id="avilableSheets"
-                                    placeholder="Avilable Sheets"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required
-                                  ></input>
-                                </div>
-                                <div>
-                                  <label
-                                    for="price"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                  >
-                                    Price
-                                  </label>
-                                  <input
-                                    type="number"
-                                    name="price"
-                                    id="price"
-                                    placeholder="Price"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required
-                                  ></input>
-                                </div>
+                                <div className="w-full text-white text-lg border py-3 px-1" id="feadbackCOntent">
 
-                                <button
-                                  type="submit"
-                                  className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                >
-                                  Update
-                                </button>
+                                </div>
+                           
                               </form>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div> */}
+                    </div>
+                  </td>
+                  <td>
+                  <Link to={`update-class/${sclass._id}`}>   <FaEdit
+                      className="text-green-500 text-xl cursor-pointer mx-auto"
+                    ></FaEdit></Link>
                   </td>
                 </tr>
               ))}

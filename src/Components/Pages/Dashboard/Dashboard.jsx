@@ -3,8 +3,8 @@ import { FaBook, FaCartPlus, FaHome, FaPlus, FaUsers } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-  const isAdmin = true;
-  const isInstructor = false;
+  const isAdmin = false;
+  const isInstructor = true;
 
   return (
     <div>

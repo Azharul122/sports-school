@@ -64,7 +64,33 @@ const sentFeaddback=(id)=>{
       })
       //update feadback here 
        if (text) {
-        Swal.fire(text)
+        const feadBack={feadBack:text};
+        fetch(`http://localhost:5000/class/feadback/${id}`, {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(feadBack),
+                })
+                  .then((res) => res.json())
+                  .then((dat) => {
+                   
+                    // refetch();
+                    // hideModal()
+                    if (dat.modifiedCount>0) {
+                        
+                      Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: `Class Updated`,
+                        showConfirmButton: false,
+                        timer: 1500,
+                      });
+                      
+                    }
+                    // nevigate("../my-classes/")
+                  });
+
       }
     })()
 }
