@@ -25,6 +25,7 @@ import AdminHome from "./Components/Pages/Dashboard/Admin/AdminHome/AdminHome";
 import ManageUsers from "./Components/Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageClasses from "./Components/Pages/Dashboard/Admin/ManageClasses/ManageClasses";
 
+  import UpdateClass from "./Components/Pages/Instructor/MyClass/UpdateClass";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -85,7 +86,13 @@ const router = createBrowserRouter([
           {
             path:"manage-users",
             element:<ManageUsers></ManageUsers>
+          } ,  
+          {
+            path:"my-classes/update-class/:id",
+            element:<UpdateClass></UpdateClass>,
+            loader: ({params})=>fetch(`http://localhost:5000/clas/${params.id}`)
           }
+       
         ],
       },
     ],
