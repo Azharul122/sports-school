@@ -2,10 +2,13 @@ import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import useClasses from "../../Hooks/useClass/useClasses";
+import useSpecificClasses from "../../Hooks/useSpecificClasses/useSpecificClasses";
 
 const Header = () => {
   const {user,logOut}=useContext(AuthContext)
-
+const [SpClass]=useSpecificClasses()
+console.log(SpClass)
 
   const handleLogOut = () => {
     logOut()

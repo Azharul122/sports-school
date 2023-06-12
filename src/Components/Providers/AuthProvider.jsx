@@ -2,6 +2,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../firebase/firebase.config';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updatePhoneNumber, updateProfile } from "firebase/auth";
+import axios from 'axios';
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
@@ -39,13 +40,24 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, loggedUser => {
 
             setUser(loggedUser)
+            if(loggedUser){
+                axios.post('http://localhost:5000/jwt',{email: loggedUser.email})
+                .then(data=>{
+                    console.log(data.data.token)
+                    localStorage.setItem('token',data.data.token)
+                })
+            }
+            else{
+                localStorage.removeItem('token')
+            }
+
             setLoading(false)
         })
         return () => {
-            unsubscribe();
+            return   unsubscribe();
         }
 
-    })
+    },[])
 
     return (
         <AuthContext.Provider value={authInfo}>

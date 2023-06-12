@@ -6,7 +6,9 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const MyClass = () => {
+
   const { user } = useContext(AuthContext);
+  
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
     const result = await fetch("http://localhost:5000/classes/");
     return result.json();

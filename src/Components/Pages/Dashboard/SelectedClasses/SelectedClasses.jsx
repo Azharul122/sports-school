@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const SelectedClasses = () => {
     const {user}=useContext(AuthContext)
@@ -102,7 +103,7 @@ const handleDelete=(classes)=>{
                     <p><b>Selected classes: </b>{userClasses.length}</p>
                     <p><b>Total price: </b>${userClasses.reduce((sum,item)=>item.price+sum,0).toFixed(2)}</p>
                     </div>
-                    <button className='px-2 py-1  bg-slate-500'>process to pay</button>
+                   <Link to={"payment"}> <button className='px-2 py-1  bg-slate-500'>process to pay</button></Link>
                 </div>
                 </section>
         </div>

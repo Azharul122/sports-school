@@ -26,6 +26,8 @@ import ManageUsers from "./Components/Pages/Dashboard/Admin/ManageUsers/ManageUs
 import ManageClasses from "./Components/Pages/Dashboard/Admin/ManageClasses/ManageClasses";
 
   import UpdateClass from "./Components/Pages/Instructor/MyClass/UpdateClass";
+import InstructorRoute from "./Components/Routes/InstructorRoute/InstructorRoute";
+import Payemnt from "./Components/Pages/Dashboard/Payemnt/Payemnt";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <Instructor></Instructor>,
+        element: <InstructorRoute><Instructor></Instructor></InstructorRoute>,
       },
       {
         path: "classes",
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
           {
             path: "selected-classes",
             element: <SelectedClasses></SelectedClasses>,
+          },
+          {
+            path: "selected-classes/payment",
+            element: <Payemnt></Payemnt>,
           },
           {
             path: "enrolled-classes",

@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FaBook, FaCartPlus, FaHome, FaPlus, FaUsers } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
+
 
 const Dashboard = () => {
-  const isAdmin = false;
-  const isInstructor = true;
+  const [isAdmin,setIsAdmin]=useState(false)
+  const [isInstructor,setIsInstructor]=useState(false)
 
+  const {user}=useContext(AuthContext)
+  fetch("http://localhost:5000/users")
+.then((res) => res.json())
+.then((data) => {
+  const filtiredUser = data.filter((d) => user?.email == d.email);
+filtiredUser.map(fu=>{
+  if(fu.role=="admin"){
+    setIsAdmin(true)
+    setIsInstructor(false)
+  }
+ else if(fu.role=="instructor"){
+    setIsAdmin(false)
+    setIsInstructor(true)
+  }
+  else{
+    setIsAdmin(false)
+    setIsInstructor(false)
+  }
+  
+})
+})
   return (
     <div>
       <div className="drawer lg:drawer-open">
