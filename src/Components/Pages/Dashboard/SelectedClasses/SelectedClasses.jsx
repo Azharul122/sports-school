@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 const SelectedClasses = () => {
     const {user}=useContext(AuthContext)
     const [selectedClasses,setSelectedClasses]=useState([])
+    //console.log(selectedClasses)
     useEffect(()=>{
         fetch("http://localhost:5000/selected-classes/")
         .then(res=>res.json())
@@ -14,7 +15,13 @@ const SelectedClasses = () => {
     },[])
     // console.log(user.email)
 //    console.log(selectedClasses.filter(sc=>sc.email==user.email))
-
+   useEffect(()=>{
+        fetch(`http://localhost:5000/selected-classes?email=${user?.email}`)
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data)
+        })
+    },[])
 
 const userClasses= selectedClasses.filter(sc=>sc?.email==user?.email);
 const handleDelete=(classes)=>{
@@ -67,7 +74,7 @@ const handleDelete=(classes)=>{
   <table className="table table-zebra">
     {/* head */}
     <thead>
-      <tr>
+      <tr className='text-black font-extrabold'>
       <th className='text-white font-bold'>SN.</th>
         <th className='text-white font-bold'>Name</th>
         <th className='text-white font-bold'>image</th>
@@ -81,11 +88,11 @@ const handleDelete=(classes)=>{
       {/* row 1 */}
    {
   user && userClasses.map((sclass,index)=>
-    <tr>
+    <tr >
     <td>{index+1}</td>
-    <td>{sclass.className}</td>
+    <td>{sclass.name}</td>
     <td>{sclass.email}</td>
-    <td>{sclass.availableSeats}</td>
+    <td>{sclass.avilableSheets}</td>
     <td>{sclass.price}</td>
     <td><FaTrash onClick={()=>handleDelete(sclass)} className='text-red-500 font-bold text-sm cursor-pointer'></FaTrash></td>
   </tr>
@@ -98,10 +105,10 @@ const handleDelete=(classes)=>{
   </table>
 </div>
     <section>
-                <div className="flex text-right  justify-between items-center pt-6 text-white">
+                <div className="flex text-right  justify-between items-center pt-6 text-black">
                     <div className="flex gap-2">
-                    <p><b>Selected classes: </b>{userClasses.length}</p>
-                    <p><b>Total price: </b>${userClasses.reduce((sum,item)=>item.price+sum,0).toFixed(2)}</p>
+                    <p><b className='text-black font-bold'>Selected classes: </b>{userClasses.length}</p>
+                    <p><b>Total price: </b>$ {userClasses.reduce((sum,item)=>parseInt(item.price)+sum,0)}</p>
                     </div>
                    <Link to={"payment"}> <button className='px-2 py-1  bg-slate-500'>process to pay</button></Link>
                 </div>

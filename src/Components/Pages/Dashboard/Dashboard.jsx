@@ -2,29 +2,39 @@ import React, { useContext, useState } from "react";
 import { FaBook, FaCartPlus, FaHome, FaPlus, FaUsers } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Spinner from "../../Spinner/Spinner";
 
 
 const Dashboard = () => {
   const [isAdmin,setIsAdmin]=useState(false)
   const [isInstructor,setIsInstructor]=useState(false)
+  const [dashboardLoading,setDashboardLoading]=useState(true)
 
-  const {user}=useContext(AuthContext)
+  const {user,loading}=useContext(AuthContext)
   fetch("http://localhost:5000/users")
 .then((res) => res.json())
 .then((data) => {
+  setDashboardLoading(false)
+  if(dashboardLoading && !user?.role){
+
+    return <Spinner></Spinner>
+  }
   const filtiredUser = data.filter((d) => user?.email == d.email);
 filtiredUser.map(fu=>{
   if(fu.role=="admin"){
     setIsAdmin(true)
     setIsInstructor(false)
+  
   }
  else if(fu.role=="instructor"){
     setIsAdmin(false)
     setIsInstructor(true)
+   
   }
   else{
     setIsAdmin(false)
     setIsInstructor(false)
+   
   }
   
 })

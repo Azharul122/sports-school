@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useClasses from "../../Hooks/useClass/useClasses";
-import useSpecificClasses from "../../Hooks/useSpecificClasses/useSpecificClasses";
+import useCart from "../../Hooks/useCart/useCart";
+import { FaMoon, FaRegMoon } from "react-icons/fa";
 
 const Header = () => {
   const {user,logOut}=useContext(AuthContext)
-const [SpClass]=useSpecificClasses()
-console.log(SpClass)
+  const [role,setRole]=useState("")
+  useEffect(()=>{
+      fetch(`http://localhost:5000/users/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+          setRole(data.role)
+       
+     
+      })
+  },[user?.email])
+// const [classesData]=useClasses()
+// const [cartData]=useCart()
+// console.log(classesData)
+// console.log(cartData)
 
   const handleLogOut = () => {
     logOut()
@@ -17,6 +30,17 @@ console.log(SpClass)
         console.log(error);
       });
   };
+
+  const whiteMode=()=>{
+    document.getElementById("home").style.backgroundColor="black"
+    document.getElementById("whiteMode").classList.add("hidden")
+    document.getElementById("derkMode").classList.remove("hidden")
+  }
+  const derkMode=()=>{
+    document.getElementById("home").style.backgroundColor="white"
+    document.getElementById("whiteMode").classList.remove("hidden")
+    document.getElementById("derkMode").classList.add("hidden")
+  }
   return (
     <>
       <div className=" bg-slate-500">
@@ -59,8 +83,11 @@ console.log(SpClass)
               <Link to={"/instructors"}>Instructors</Link>
               <Link to={"/classes"}>Classes</Link>
               {
-                  user && <Link to={"/dashboard"}>Dashboard</Link>
+                role && user &&  role=="admin"?<Link to={"dashboard/admin-home"}>Dashboard</Link>:role=="instructor"?<Link to={"dashboard/instructor-home"}>Dashboard</Link>:<Link to={"dashboard/student-home"}>Dashboard</Link>
+                  // role && <Link to={role=="admin"?"/dashboard/admin-home":role="instructor" ?"/instructor-home":"/student-hom"}>Dashboard</Link>
                 }
+                <FaMoon onClick={ whiteMode} id="whiteMode" className="text-lg cursor-pointer" ></FaMoon>
+                <FaRegMoon onClick={derkMode} id="derkMode" className="text-lg hidden cursor-pointer" ></FaRegMoon>
             </ul>
           </div>
           <div className="navbar-end">

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import SectionTitle from "../../../Title/SectionTitle"
 import Swal from "sweetalert2";
 
 const AddClass = () => {
@@ -14,7 +15,7 @@ const AddClass = () => {
         const image=form.image.value
         const iname=form.instructorName.value
         const iemail=form.instructorEmail.value
-        const result={avilableSheets,name,price,image,iname,iemail,feadBack:"",status:"pending"}
+        const result={avilableSheets,name,price,image,iname,iemail,feadBack:"",status:"pending",NOS:20}
        
         fetch(`http://localhost:5000/classes`, {
             method: "POST",
@@ -40,6 +41,7 @@ const AddClass = () => {
 
   return (
     <div>
+                <SectionTitle heading={"Add New Class"}></SectionTitle>
                 <div className="relative flex flex-col justify-center overflow-hidden ">
                 <div className="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
                     <h1 className="text-3xl font-semibold text-center text-gray-700">
@@ -55,7 +57,7 @@ const AddClass = () => {
                                     name="name"
                                     type="text"
                                     placeholder="Name"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white"
                                 />
                             </div>
                             <div>
@@ -65,8 +67,8 @@ const AddClass = () => {
                                 <input
                                     type="text"
                                     name="image"
-                                    placeholder="Email Address"
-                                    className="w-full input input-bordered"
+                                    placeholder="Image Link"
+                                    className="w-full input input-bordered text-white"
                                 />
                           
                             </div>
@@ -78,7 +80,7 @@ const AddClass = () => {
                                     type="number"
                                    name="avilableSheets"
                                     placeholder="Avilable Sheets"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white"
                                 />
                             </div>
                             <div>
@@ -89,7 +91,7 @@ const AddClass = () => {
                                     type="number"
                                     name="price"
                                     placeholder="Price"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white"
                                 />
                                
                             </div>
@@ -97,14 +99,14 @@ const AddClass = () => {
                                 <label className="label">
                                     <span className="text-black abel-text">Instructor Name</span>
                                 </label>
-                                <input value={user?user.displayName:""} disabled type="email"  className="w-full input input-bordered" name="instructorName" placeholder="Inatructor Name"/>
+                                <input value={user?user.displayName:""} disabled type="email"  className="w-full input input-bordered text-white" name="instructorName" placeholder="Inatructor Name"/>
                                
                             </div>
                             <div>
                                 <label className="label">
                                     <span className="text-black abel-text">Instructor Email</span>
                                 </label>
-                                <input id="instructorEmail" value={user?user.email:""} disabled type="text"  className="w-full input input-bordered" name="instructorEmail"  placeholder="Instructor Email"/>
+                                <input id="instructorEmail" value={user?user.email:""} disabled type="text"  className="w-full input input-bordered text-white" name="instructorEmail"  placeholder="Instructor Email"/>
                                
                             </div>
                         </div>

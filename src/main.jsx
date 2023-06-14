@@ -28,6 +28,8 @@ import ManageClasses from "./Components/Pages/Dashboard/Admin/ManageClasses/Mana
   import UpdateClass from "./Components/Pages/Instructor/MyClass/UpdateClass";
 import InstructorRoute from "./Components/Routes/InstructorRoute/InstructorRoute";
 import Payemnt from "./Components/Pages/Dashboard/Payemnt/Payemnt";
+import AdminRoute from "./Components/Routes/AdninRoute/AdminRoute";
+import StudentHome from "./Components/Pages/Dashboard/StudentHome/StudentHome";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <InstructorRoute><Instructor></Instructor></InstructorRoute>,
+        element: <Instructor></Instructor>,
       },
       {
         path: "classes",
@@ -55,8 +57,12 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
+          {
+            path: "student-home",
+            element: <StudentHome></StudentHome>,
+          },
           {
             path: "selected-classes",
             element: <SelectedClasses></SelectedClasses>,
@@ -69,35 +75,38 @@ const router = createBrowserRouter([
             path: "enrolled-classes",
             element: <EnrolledClasses></EnrolledClasses>,
           },
+                // ........................................... Instrucror ..............................................................................
           {
             path: "instructor-home",
-            element: <InstructorHome></InstructorHome>,
+            element: <InstructorRoute><InstructorHome></InstructorHome></InstructorRoute>,
           },
           {
             path: "add-class",
-            element: <AddClass></AddClass>,
+            element: <InstructorRoute><AddClass></AddClass></InstructorRoute>,
           },
           {
             path: "my-classes",
-            element: <MyClass></MyClass>,
+            element: <InstructorRoute><MyClass></MyClass></InstructorRoute>,
           },
           {
+            path:"my-classes/update-class/:id",
+            element:<InstructorRoute><UpdateClass></UpdateClass></InstructorRoute>,
+            loader: ({params})=>fetch(`http://localhost:5000/clas/${params.id}`)
+          },
+          // ............................................. Admin...............................................................
+          {
             path:"admin-home",
-            element:<AdminHome></AdminHome>
+            element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
           },
           {
             path:"manage-classes",
-            element:<ManageClasses></ManageClasses>
+            element:<AdminRoute><ManageClasses></ManageClasses></AdminRoute>
           },
           {
             path:"manage-users",
-            element:<ManageUsers></ManageUsers>
-          } ,  
-          {
-            path:"my-classes/update-class/:id",
-            element:<UpdateClass></UpdateClass>,
-            loader: ({params})=>fetch(`http://localhost:5000/clas/${params.id}`)
-          }
+            element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+          } 
+       
        
         ],
       },

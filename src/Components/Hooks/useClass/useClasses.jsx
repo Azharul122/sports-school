@@ -7,19 +7,21 @@ const useClasses = () => {
   const {
     isLoading,
     error,
-    data: classes = [],
+    data: classesData = [],
     refetch,
   } = useQuery({
-    queryKey: ["classes"],
-    queryFn: () =>
-      fetch("http://localhost:5000/classes")
-        .then((res) => res.json())
-        .then((data) => {
-          return data;
-        }),
+    queryKey: ["classesData"],
+    queryFn: async() => {
+      if (!user) {
+        return [];
+      }
+      const res=await fetch("http://localhost:5000/classes")
+      const data=await res.json()
+      console.log(data)
+      return data
+    },
   });
-
-  return [classes, refetch];
+  return [classesData, refetch];
 };
 
 export default useClasses;

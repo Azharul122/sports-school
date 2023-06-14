@@ -122,6 +122,7 @@ const sentFeaddback=(id)=>{
               <th className="text-white font-bold">Avilable Sheets</th>
               <th className="text-white font-bold">Price</th>
               <th className="text-white font-bold">Stutus</th>
+              <th className="text-white font-bold">Action</th>
               <th className="text-white font-bold">Feaddback</th>
             </tr>
           </thead>
@@ -131,10 +132,10 @@ const sentFeaddback=(id)=>{
               classes.map((sclass, index) => (
                 <tr key={sclass._id}>
                   <td>{index + 1}</td>
-                  <td>{sclass.className}</td>
-                  <td>{sclass.instructorName}</td>
+                  <td>{sclass.name}</td>
+                  <td>{sclass.iname}</td>
 
-                  <td>{sclass.instructorEmail}</td>
+                  <td>{sclass.iemail}</td>
                   <td>
                     <img
                       src={sclass.image}
@@ -142,12 +143,11 @@ const sentFeaddback=(id)=>{
                       className="h-[40px] w-[40px]"
                     />
                   </td>
-                  <td>{sclass.availableSeats}</td>
+                  <td>{sclass.avilableSheets}</td>
                   <td>${sclass.price}</td>
+                  <td>{sclass.status}</td>
                   <td>
-                    <button className="bg-stone-500 text-white p-1">
-                      Pending
-                    </button>{" "}
+                   
                     <button
                       disabled={sclass.status == "approved"}
                       onClick={() => makeApprove(sclass._id)}

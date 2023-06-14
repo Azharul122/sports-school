@@ -94,14 +94,14 @@ const [id,setId]=useState(null)
   return (
     <div className="w-full px-2">
       <section>
-        <div className="flex text-right  justify-between items-center pb-6 text-white">
+        <div className="flex text-right  items-center pb-6 text-white">
           <div className="flex gap-2">
             <p>
               <b>Total Classes: </b>
               {filterMtClasses.length}
             </p>
           </div>
-          <button className="px-2 py-1  bg-slate-500">process to pay</button>
+          
         </div>
       </section>
 
@@ -119,6 +119,7 @@ const [id,setId]=useState(null)
               <th className="text-white font-bold">Price</th>
               <th className="text-white font-bold">Stutus</th>
               <th className="text-white font-bold">Enrolled</th>
+              <th className="text-white font-bold"><abbr title="Number of Students">NOS</abbr></th>
               <th className="text-white font-bold">FeadBack</th>
               <th className="text-white font-bold">Actions</th>
             </tr>
@@ -145,6 +146,7 @@ const [id,setId]=useState(null)
                   <td>{sclass.status}</td>
 
                   <td></td>
+                  <td>{sclass.NOS}</td>
                   <td>
                     {sclass.feadBack != "" && (
                       <button

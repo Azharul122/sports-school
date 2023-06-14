@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
+
 import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 import Spinner from "../../Spinner/Spinner";
 
 // const InstructorRoute = ({ children }) => {
@@ -44,21 +45,25 @@ import Spinner from "../../Spinner/Spinner";
 // import React from 'react';
 
 const InstructorRoute = ({children}) => {
-    const [loading,setLoading]=useState(true)
-    const [role,setRole]=useState("")
+    const [instructorLoading,setInstructorLoading]=useState(true)
+
+    
  
-    const { user } = useContext(AuthContext);
+    const { user,loading } = useContext(AuthContext);
+    const [role,setRole]=useState("")
     useEffect(()=>{
         fetch(`http://localhost:5000/users/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
-            setLoading(false)
             setRole(data.role)
+            setInstructorLoading(false)
+       
         })
     },[user?.email])
-   if(loading){
+   if(loading || instructorLoading){
         return <Spinner></Spinner>
    }
+   console.log(role)
    if(role=="instructor"){
     return children
    }
