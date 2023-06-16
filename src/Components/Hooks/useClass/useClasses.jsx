@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import { FaSpinner } from "react-icons/fa";
 
 const useClasses = () => {
   const { user } = useContext(AuthContext);
@@ -12,12 +13,12 @@ const useClasses = () => {
   } = useQuery({
     queryKey: ["classesData"],
     queryFn: async() => {
-      if (!user) {
-        return [];
+      if (!user || isLoading) {
+      <FaSpinner></FaSpinner>
       }
       const res=await fetch("http://localhost:5000/classes")
       const data=await res.json()
-      console.log(data)
+     
       return data
     },
   });

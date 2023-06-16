@@ -6,6 +6,7 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 // import useClasses from '../../../Hooks/useClass/useClasses';
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ totalPrice, cartLength, cartData }) => {
   const stripe = useStripe();
@@ -13,12 +14,13 @@ const CheckoutForm = ({ totalPrice, cartLength, cartData }) => {
   const [cardError, setCardeorror] = useState("");
   const [clientSecret, setclientSecret] = useState([]);
   const { user } = useContext(AuthContext);
+  const navigate=useNavigate
   // const [classesData]=useClasses()
   const [transactionId, setTransactionId] = useState("");
   useEffect(() => {
     if (totalPrice > 0) {
       const price = { price: totalPrice };
-      fetch(`http://localhost:5000/craete-payment-intent`, {
+      fetch(`https://as-12.vercel.app/craete-payment-intent`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -93,18 +95,27 @@ const CheckoutForm = ({ totalPrice, cartLength, cartData }) => {
       };
 
 
-          // fetch(`http://localhost:5000/payments`, {
+          // fetch(`https://as-12.vercel.app/payments`, {
           //   method: "POST",
           //   headers: {
           //     "content-type": "application/json",
           //   },
           //   body: JSON.stringify(payment),
           // })
-          axios.post('http://localhost:5000/payments', payment)
+          axios.post('https://as-12.vercel.app/payments', payment)
           .then(res => {
               console.log(res.data);
               if (res.data.result.insertedId) {
-                  // display confirm
+
+              
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Paayment success',
+                  showConfirmButton: false,
+                  timer: 2500
+                })
+                navigate("../enrolled-classes")
               }
           })
  

@@ -19,8 +19,9 @@ const Header = () => {
       })
   },[user?.email])
 // const [classesData]=useClasses()
-// const [cartData]=useCart()
 // console.log(classesData)
+// const [cartData]=useCart()
+
 // console.log(cartData)
 
   const handleLogOut = () => {
@@ -83,7 +84,7 @@ const Header = () => {
               <Link to={"/instructors"}>Instructors</Link>
               <Link to={"/classes"}>Classes</Link>
               {
-                role && user &&  role=="admin"?<Link to={"dashboard/admin-home"}>Dashboard</Link>:role=="instructor"?<Link to={"dashboard/instructor-home"}>Dashboard</Link>:<Link to={"dashboard/student-home"}>Dashboard</Link>
+                role && user &&  role=="admin"?<Link to={"dashboard/admin-home"}>Dashboard</Link>:user && role=="instructor"?<Link to={"dashboard/instructor-home"}>Dashboard</Link>:user && <Link to={"dashboard/student-home"}>Dashboard</Link>
                   // role && <Link to={role=="admin"?"/dashboard/admin-home":role="instructor" ?"/instructor-home":"/student-hom"}>Dashboard</Link>
                 }
                 <FaMoon onClick={ whiteMode} id="whiteMode" className="text-lg cursor-pointer" ></FaMoon>

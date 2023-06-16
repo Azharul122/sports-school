@@ -15,7 +15,7 @@ const EnrolledClasses = () => {
           setClasses(response.data);
           setIsLoading(false);
         } catch (error) {
-          console.error('Error fetching data:', error);
+        
         }
       };
       fetchData()
@@ -44,6 +44,8 @@ const EnrolledClasses = () => {
             <thead>
               <tr className="text-center">
                 <th className="text-white font-bold">SN.</th>
+                <th className="text-white font-bold">Classes Name.</th>
+                
                 <th className="text-white font-bold">transactionId</th>
                 <th className="text-white font-bold">Price</th>
                 <th className="text-white font-bold">date</th>
@@ -55,16 +57,21 @@ const EnrolledClasses = () => {
             <tbody>
               {/* row 1 */}
               {user &&
-                 classes.sort((a, b) => b.date-a.date).map((sclass, index) => (
-                  <tr key={sclass._id} className="text-center">
-                    <td>{index + 1}</td>
-                    <td>{sclass.transactionId}</td>
-                    <td>$ {sclass.price}</td>
+                 classes.sort((a, b) =>new Date(b.date)-new Date(a.date)).map((sclass, index) => (
+                  <tr key={sclass._id} className="text-center ">
+                    <td className='border py-2'>{index + 1}</td>
+                    <td className='border py-2'>
+                      {
+                        sclass.itemNames.map(clas=>(<p className=''>{clas}</p>))
+                      }
+                    </td>
+                    <td className='border py-2'>{sclass.transactionId}</td>
+                    <td className='border py-2'>$ {sclass.price}</td>
                     {/* avilableSheets,name,price,image,iname,iemail,feadBack:"",status:"pending" */}
-                    <td>{sclass.date}</td>
+                    <td className='border py-2'>{sclass.date}</td>
               
-                    <td>{sclass.quantity}</td>
-                    <td>{sclass.status}</td>
+                    <td className='border py-2'>{sclass.quantity}</td>
+                    <td className='border py-2'> {sclass.status}</td>
   
                   </tr>
                 ))}
