@@ -11,7 +11,7 @@ const Classes = () => {
   const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/classes/")
+    fetch("https://as-12.vercel.app/classes/")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
@@ -40,7 +40,7 @@ const Classes = () => {
       //   event.currentTarget.disabled = true;
         
       // }
-      fetch("http://localhost:5000/selected-classes", {
+      fetch("https://as-12.vercel.app/selected-classes", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

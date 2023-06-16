@@ -10,7 +10,7 @@ const useCart = () => {
         queryKey: ['selected-classes/email',user?.email],
         enabled:!!user?.email,
         queryFn: async () => {
-            // fetch(`http://localhost:5000/selected-classes/email/${user?.email}`)
+            // fetch(`https://as-12.vercel.app/selected-classes/email/${user?.email}`)
             // .then(res=>res.json())
             // .then(data=>
             //     {
@@ -20,7 +20,7 @@ const useCart = () => {
             if(!user){
                 return []
             }
-            const res=await fetch(`http://localhost:5000/selected-classes/email/${user?.email}`)
+            const res=await fetch(`https://as-12.vercel.app/selected-classes/email/${user?.email}`)
             const data=await res.json()
             console.log(data)
             return data

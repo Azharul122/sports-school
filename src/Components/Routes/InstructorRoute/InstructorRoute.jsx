@@ -14,7 +14,7 @@ import Spinner from "../../Spinner/Spinner";
 //     return <Spinner></Spinner>
 //   }
 //   if (user) {
-//     fetch(`http://localhost:5000/users/${user.email}`)
+//     fetch(`https://as-12.vercel.app/users/${user.email}`)
 //       .then((res) => res.json())
 //       .then((data) => {
 //       console.log(data.role)
@@ -52,7 +52,7 @@ const InstructorRoute = ({children}) => {
     const { user,loading } = useContext(AuthContext);
     const [role,setRole]=useState("")
     useEffect(()=>{
-        fetch(`http://localhost:5000/users/${user?.email}`)
+        fetch(`https://as-12.vercel.app/users/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
             setRole(data.role)

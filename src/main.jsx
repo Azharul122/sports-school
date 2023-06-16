@@ -30,6 +30,8 @@ import InstructorRoute from "./Components/Routes/InstructorRoute/InstructorRoute
 import Payemnt from "./Components/Pages/Dashboard/Payemnt/Payemnt";
 import AdminRoute from "./Components/Routes/AdninRoute/AdminRoute";
 import StudentHome from "./Components/Pages/Dashboard/StudentHome/StudentHome";
+import StudentRoute from "./Components/Routes/StudentRoute/StudentRoute";
+import Error from "./Components/Pages/Error/Error";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,19 +63,19 @@ const router = createBrowserRouter([
         children: [
           {
             path: "student-home",
-            element: <StudentHome></StudentHome>,
+            element: <StudentRoute><StudentHome></StudentHome></StudentRoute>,
           },
           {
             path: "selected-classes",
-            element: <SelectedClasses></SelectedClasses>,
+            element:<StudentRoute> <SelectedClasses></SelectedClasses></StudentRoute>,
           },
           {
             path: "selected-classes/payment",
-            element: <Payemnt></Payemnt>,
+            element: <StudentRoute><Payemnt></Payemnt></StudentRoute>,
           },
           {
             path: "enrolled-classes",
-            element: <EnrolledClasses></EnrolledClasses>,
+            element: <StudentRoute><EnrolledClasses></EnrolledClasses></StudentRoute>,
           },
                 // ........................................... Instrucror ..............................................................................
           {
@@ -91,7 +93,7 @@ const router = createBrowserRouter([
           {
             path:"my-classes/update-class/:id",
             element:<InstructorRoute><UpdateClass></UpdateClass></InstructorRoute>,
-            loader: ({params})=>fetch(`http://localhost:5000/clas/${params.id}`)
+            loader: ({params})=>fetch(`https://as-12.vercel.app/clas/${params.id}`)
           },
           // ............................................. Admin...............................................................
           {
@@ -110,8 +112,14 @@ const router = createBrowserRouter([
        
         ],
       },
+ 
     ],
+
   },
+  {
+    path:"*",
+    element:<Error></Error>
+  }
 ]);
 
 const queryClient = new QueryClient();

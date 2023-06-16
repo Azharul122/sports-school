@@ -7,11 +7,11 @@ import { FaUsers } from "react-icons/fa";
 
 
 
-// http://localhost:5000/classes/
+// https://as-12.vercel.app/classes/
 const PopularClasses = () => {
     // const [classes,setClasses]=useState([]);
     // useEffect(()=>{
-    //     fetch("http://localhost:5000/classes/")
+    //     fetch("https://as-12.vercel.app/classes/")
     //     .then(res=>res.json())
     //     .then(data=>setClasses(data))
     // },[])
@@ -22,7 +22,7 @@ const PopularClasses = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get('http://localhost:5000/classes/');
+          const response = await axios.get('https://as-12.vercel.app/classes/');
           setClasses(response.data);
           setIsLoading(false);
         } catch (error) {

@@ -19,7 +19,7 @@ const UpdateClass = () => {
         const result={avilableSheets,name,price,image}
         console.log(result)
 
-        fetch(`http://localhost:5000/classUpadte/${data._id}`, {
+        fetch(`https://as-12.vercel.app/classUpadte/${data._id}`, {
                   method: "PUT",
                   headers: {
                     "Content-Type": "application/json",

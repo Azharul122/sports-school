@@ -10,7 +10,7 @@ const MyClass = () => {
   const { user } = useContext(AuthContext);
   
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
-    const result = await fetch("http://localhost:5000/classes/");
+    const result = await fetch("https://as-12.vercel.app/classes/");
     return result.json();
   });
 const [id,setId]=useState(null)
@@ -30,7 +30,7 @@ const [id,setId]=useState(null)
 //     const price = event.target.price.value;
 //     const classOBj = { name, image, avilableSheets, price };
 
-//     fetch(`http://localhost:5000/classUpadte/${sclass._id}`, {
+//     fetch(`https://as-12.vercel.app/classUpadte/${sclass._id}`, {
 //       method: "PUT",
 //       headers: {
 //         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const [id,setId]=useState(null)
   // update
   // const updateclassName=(sclass)=>{
   //     const classCollection={name:sclass.name,image:sclass.image,avilableSheets:sclass.avilableSheets,price:sclass.price}
-  //     fetch(`http://localhost:5000/classUpadte/${sclass._id}`,{
+  //     fetch(`https://as-12.vercel.app/classUpadte/${sclass._id}`,{
   //             method:"PUT",
   //             headers:{
   //                 'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ const [id,setId]=useState(null)
   // end update
 
   const filterMtClasses = classes.filter(
-    (cl) => user?.email === cl.iemail && cl.status == "pending"
+    (cl) => user?.email === cl.iemail 
   );
   //console.log(filterMtClasses);
   return (
@@ -148,12 +148,12 @@ const [id,setId]=useState(null)
                   <td></td>
                   <td>{sclass.NOS}</td>
                   <td>
-                    {sclass.feadBack != "" && (
+                    {sclass.status == "denied" && (
                       <button
                         className="text-white bg-red-500 p-1"
                         onClick={() => showFeaddback(sclass)}
                       >
-                        FeadBack
+                     FeedBack
                       </button>
                     )}
            

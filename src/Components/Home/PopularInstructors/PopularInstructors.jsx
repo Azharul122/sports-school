@@ -8,7 +8,7 @@ import { Bounce } from 'react-awesome-reveal';
 const PopularInstructors = () => {
     const [instructors,setInstructors]=useState([]);
     useEffect(()=>{
-        fetch("http://localhost:5000/users/")
+        fetch("https://as-12.vercel.app/users/")
         .then(res=>res.json())
         .then(data=>{
           const fInstructor=data.filter(fi=>fi.role=="instructor")

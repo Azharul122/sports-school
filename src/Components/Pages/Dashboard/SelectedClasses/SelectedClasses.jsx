@@ -9,14 +9,14 @@ const SelectedClasses = () => {
     const [selectedClasses,setSelectedClasses]=useState([])
     //console.log(selectedClasses)
     useEffect(()=>{
-        fetch("http://localhost:5000/selected-classes/")
+        fetch("https://as-12.vercel.app/selected-classes/")
         .then(res=>res.json())
         .then(data=>setSelectedClasses(data))
     },[])
     // console.log(user.email)
 //    console.log(selectedClasses.filter(sc=>sc.email==user.email))
    useEffect(()=>{
-        fetch(`http://localhost:5000/selected-classes?email=${user?.email}`)
+        fetch(`https://as-12.vercel.app/selected-classes?email=${user?.email}`)
         .then(res=>res.json())
         .then(data=>{
           console.log(data)
@@ -35,7 +35,7 @@ const handleDelete=(classes)=>{
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`http://localhost:5000/selected-classes/${classes._id}`,{
+            fetch(`https://as-12.vercel.app/selected-classes/${classes._id}`,{
                 method:'DELETE'
             })
             .then(res=>res.json())

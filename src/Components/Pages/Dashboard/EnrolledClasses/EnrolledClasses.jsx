@@ -11,7 +11,7 @@ const EnrolledClasses = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:5000/enrolled/${user.email}`);
+          const response = await axios.get(`https://as-12.vercel.app/enrolled/${user.email}`);
           setClasses(response.data);
           setIsLoading(false);
         } catch (error) {

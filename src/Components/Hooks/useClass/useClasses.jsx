@@ -16,7 +16,7 @@ const useClasses = () => {
       if (!user || isLoading) {
       <FaSpinner></FaSpinner>
       }
-      const res=await fetch("http://localhost:5000/classes")
+      const res=await fetch("https://as-12.vercel.app/classes")
       const data=await res.json()
      
       return data

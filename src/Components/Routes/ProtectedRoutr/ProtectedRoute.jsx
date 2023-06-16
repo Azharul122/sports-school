@@ -6,7 +6,7 @@ import { AuthContext } from '../../Providers/AuthProvider';
 const ProtectedRoute = ({ component: Component, allowedRoles, ...rest }) => {
     const navigate=useNavigate()
   const { user } = useContext(AuthContext);
-  fetch(`http://localhost:5000/users/${user?.email}`)
+  fetch(`https://as-12.vercel.app/users/${user?.email}`)
   .then((res) => res.json())
   .then((data) =>{
     const isAuthorized = allowedRoles.includes(data.role);

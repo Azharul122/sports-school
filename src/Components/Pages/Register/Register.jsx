@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import AuthProvider, { AuthContext } from "../../Providers/AuthProvider";
 import {
@@ -14,9 +14,9 @@ import Swal from "sweetalert2";
 
 const Register = () => {
     const [msg, setMsg] = useState("");
-
+const location=useLocation()
     const [error, setError] = useState("");
-
+    const from = location.state?.from?.pathname || "/"
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
     const { createUser ,updateUserProfile} = useContext(AuthContext);
@@ -27,7 +27,7 @@ const Register = () => {
             .then((result) => {
                 const user = result.user;
                 const saveUser = {name: user.displayName, email:user.email, photoURL:user.photoURL,role:"Student" };
-                    fetch(`http://localhost:5000/users`, {
+                    fetch(`https://as-12.vercel.app/users`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json",
@@ -37,7 +37,7 @@ const Register = () => {
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.insertedId) {
-                            reset();
+                           nevigate(from);
                             Swal.fire({
                                 position: "center",
                                 icon: "success",
@@ -48,7 +48,7 @@ const Register = () => {
                         }
                     });//then data
 
-               // nevigate("/");
+               
             })
             .then((error) => {
                 console.log(error);
@@ -76,7 +76,7 @@ const Register = () => {
                 const createdUser = result.user;
                 updateUserProfile(name, photoURL).then(() => {
                     const saveUser = { name, email, photoURL, role:"Student" };
-                    fetch(`http://localhost:5000/users`, {
+                    fetch(`https://as-12.vercel.app/users`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json",

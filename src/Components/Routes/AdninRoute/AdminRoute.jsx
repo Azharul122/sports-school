@@ -11,7 +11,7 @@ const AdminRoute = ({children}) => {
  
     const { user } = useContext(AuthContext);
     useEffect(()=>{
-        fetch(`http://localhost:5000/users/${user?.email}`)
+        fetch(`https://as-12.vercel.app/users/${user?.email}`)
         .then((res) => res.json())
         .then((data) => {
             setLoading(false)

@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [dashboardLoading,setDashboardLoading]=useState(true)
 
   const {user,loading}=useContext(AuthContext)
-  fetch("http://localhost:5000/users")
+  fetch("https://as-12.vercel.app/users")
 .then((res) => res.json())
 .then((data) => {
   setDashboardLoading(false)

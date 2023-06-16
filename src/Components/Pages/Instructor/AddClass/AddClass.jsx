@@ -17,7 +17,7 @@ const AddClass = () => {
         const iemail=form.instructorEmail.value
         const result={avilableSheets,name,price,image,iname,iemail,feadBack:"",status:"pending",NOS:20}
        
-        fetch(`http://localhost:5000/classes`, {
+        fetch(`https://as-12.vercel.app/classes`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",

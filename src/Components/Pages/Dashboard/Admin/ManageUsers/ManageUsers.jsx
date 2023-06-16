@@ -9,13 +9,13 @@ const ManageUsers = () => {
     const {user}=useContext(AuthContext)
     const {data:users=[],refetch}=useQuery(['users'],async()=>{
     
-    const result=await fetch("http://localhost:5000/users/")
+    const result=await fetch("https://as-12.vercel.app/users/")
     return result.json()
     })
 
     const makeInstructor=(id,name)=>{
         // fetch("") instructor
-        fetch(`http://localhost:5000/instructor/users/${id}`,{
+        fetch(`https://as-12.vercel.app/instructor/users/${id}`,{
             method:"PATCH"
 
         })
@@ -35,7 +35,7 @@ Swal.fire({
         })
     }
     const makeAdmin=(id,name)=>{
-        fetch(`http://localhost:5000/admin/users/${id}`,{
+        fetch(`https://as-12.vercel.app/admin/users/${id}`,{
             method:"PATCH"
 
         })

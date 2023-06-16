@@ -6,14 +6,14 @@ import Swal from "sweetalert2";
 const ManageClasses = () => {
   const { user } = useContext(AuthContext);
   const { data: classes = [], refetch } = useQuery(["classes"], async () => {
-    const result = await fetch("http://localhost:5000/classes/");
+    const result = await fetch("https://as-12.vercel.app/classes/");
     return result.json();
   });
 
   //make approve
   const makeApprove = (id) => {
     // fetch("") instructor
-    fetch(`http://localhost:5000/classes/approve/${id}`, {
+    fetch(`https://as-12.vercel.app/classes/approve/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -33,7 +33,7 @@ const ManageClasses = () => {
   // Make denie
   const makeDenie = (id) => {
     // fetch("") instructor
-    fetch(`http://localhost:5000/classes/deny/${id}`, {
+    fetch(`https://as-12.vercel.app/classes/deny/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -65,7 +65,7 @@ const sentFeaddback=(id)=>{
       //update feadback here 
        if (text) {
         const feadBack={feadBack:text};
-        fetch(`http://localhost:5000/class/feadback/${id}`, {
+        fetch(`https://as-12.vercel.app/class/feadback/${id}`, {
                   method: "PUT",
                   headers: {
                     "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const sentFeaddback=(id)=>{
       </section>
 
       <div className="overflow-x-auto">
-        <table className="table overflow-x-auto table-xs w-full">
+        <table className="table table-pin-cols table-xs w-full">
           {/* head */}
           <thead>
             <tr className="text-center">
@@ -146,7 +146,7 @@ const sentFeaddback=(id)=>{
                   <td>{sclass.avilableSheets}</td>
                   <td>${sclass.price}</td>
                   <td>{sclass.status}</td>
-                  <td>
+                  <td className="flex gap-1 items-center">
                    
                     <button
                       disabled={sclass.status == "approved"}

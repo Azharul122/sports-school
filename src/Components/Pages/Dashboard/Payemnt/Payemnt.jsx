@@ -10,7 +10,7 @@ const Payemnt = () => {
   const [cartData,setCartData]=useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:5000/selected-classes/email/${user?.email}`)
+    fetch(`https://as-12.vercel.app/selected-classes/email/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setCartData(data));
   }, []);
