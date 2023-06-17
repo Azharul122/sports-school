@@ -20,7 +20,7 @@ const PopularInstructors = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-10 container mx-auto">
                     {
                         instructors.slice(0,6).map(instructor => (
-                           <Bounce>
+                           <Bounce key={instructor._id}>
                              <div className="card  bg-slate-500 shadow-xl text-white rounded">
                             <figure className="px-10 pt-10">
                               <img src={instructor.photoURL} alt="Shoes" className="rounded-xl h-[209px] md:h-[300px]" />

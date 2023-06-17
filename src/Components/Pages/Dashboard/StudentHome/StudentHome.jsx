@@ -1,9 +1,10 @@
 import React from 'react';
+import SectionTitle from '../../../Title/SectionTitle';
 
 const StudentHome = () => {
     return (
         <div>
-            <p>Student Home</p>
+          <SectionTitle heading={"Student Home"}></SectionTitle>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SectionTitle from '../../Title/SectionTitle';
 
 
 const Instructor = () => {
@@ -14,11 +15,11 @@ const Instructor = () => {
 
     return (
         <div>
-            
+            <SectionTitle heading={"All Instructors"}></SectionTitle>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-10 container mx-auto">
                     {
                         instructors.map(instructor => (
-                            <div className="card  bg-slate-500 shadow-xl text-white rounded " key={instructor._id}>
+                            <div  className="card  bg-slate-500 shadow-xl text-white rounded " key={instructor._id}>
                             <figure className="px-10 pt-10">
                               <img src={instructor.photoURL} alt="Shoes" className="rounded-xl h-[200px] md:h[300px]" />
                             </figure>

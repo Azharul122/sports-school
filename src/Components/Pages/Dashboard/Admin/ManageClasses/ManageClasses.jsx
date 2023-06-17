@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../../Title/SectionTitle";
 
 const ManageClasses = () => {
   const { user } = useContext(AuthContext);
@@ -82,7 +83,7 @@ const sentFeaddback=(id)=>{
                       Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: `Class Updated`,
+                        title: `Feedback send`,
                         showConfirmButton: false,
                         timer: 1500,
                       });
@@ -96,15 +97,16 @@ const sentFeaddback=(id)=>{
 }
   return (
     <div className="w-full md:w-[90%] mx-auto">
+      <SectionTitle heading={"Manage Classes"}></SectionTitle>
       <section>
-        <div className="flex text-right  justify-between items-center pb-6 text-white">
+        <div className="flex text-right  justify-center items-center pb-6 text-white">
           <div className="flex gap-2">
             <p>
               <b>Total Classes: </b>
               {classes.length}
             </p>
           </div>
-          <button className="px-2 py-1  bg-slate-500">process to pay</button>
+          
         </div>
       </section>
 

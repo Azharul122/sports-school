@@ -7,6 +7,7 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import SectionTitle from "../../../Title/SectionTitle";
 
 const CheckoutForm = ({ totalPrice, cartLength, cartData }) => {
   const stripe = useStripe();
@@ -84,6 +85,7 @@ const CheckoutForm = ({ totalPrice, cartLength, cartData }) => {
       const payment = {
         email: user?.email,
         transactionId: paymentIntent.id,
+        menuId: cartData.itemId,
         price: totalPrice,
         date: new Date(),
         quantity: cartLength,
@@ -106,8 +108,6 @@ const CheckoutForm = ({ totalPrice, cartLength, cartData }) => {
           .then(res => {
               console.log(res.data);
               if (res.data.result.insertedId) {
-
-              
                 Swal.fire({
                   position: 'center',
                   icon: 'success',
@@ -125,6 +125,7 @@ const CheckoutForm = ({ totalPrice, cartLength, cartData }) => {
 
   return (
     <div className="w-full">
+      <SectionTitle heading={"Payment now"}></SectionTitle>
       <div className="w-full py-4 text-center">
         <p>{cartLength}</p>
       </div>

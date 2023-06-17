@@ -17,6 +17,7 @@ const AdminRoute = ({children}) => {
             setLoading(false)
             setRole(data.role)
         })
+        
     },[user?.email])
    if(loading){
         return <Spinner></Spinner>

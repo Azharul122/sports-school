@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
+import SectionTitle from "../../Title/SectionTitle";
 
 const Classes = () => {
 
@@ -75,6 +76,7 @@ const Classes = () => {
   // console.log(className)
   return (
     <div>
+      <SectionTitle heading={"All Classes"}></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-10 container mx-auto">
         { classes.filter(c=>c.status==="approved").map((clas) => (
           <div className={`card   shadow-xl text-white rounded ${clas.avilableSheets<1?"bg-red-500 opacity-70":"bg-slate-500"}`}>

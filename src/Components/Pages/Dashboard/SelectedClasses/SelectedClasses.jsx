@@ -3,6 +3,7 @@ import { FaTrash } from 'react-icons/fa';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import SectionTitle from '../../../Title/SectionTitle';
 
 const SelectedClasses = () => {
     const {user}=useContext(AuthContext)
@@ -66,9 +67,7 @@ const handleDelete=(classes)=>{
 }
     return (
         <div className='w-full md:w-[90%] mx-auto'>
-            <section>
-
-            </section>
+           <SectionTitle heading={"Your Selected Classes"}></SectionTitle>
 
             <div className="overflow-x-auto w-full">
   <table className="table table-zebra">
@@ -88,7 +87,7 @@ const handleDelete=(classes)=>{
       {/* row 1 */}
    {
   user && userClasses.map((sclass,index)=>
-    <tr >
+    <tr  key={sclass._id}>
     <td>{index+1}</td>
     <td>{sclass.name}</td>
     <td>{sclass.email}</td>

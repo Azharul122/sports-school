@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Fade, Rotate } from 'react-awesome-reveal';
-import { FaUsers } from "react-icons/fa";
+import { FaSpinner, FaUsers } from "react-icons/fa";
 
 
 
@@ -37,7 +37,7 @@ const PopularClasses = () => {
 
 
     if (isLoading) {
-      return <faSpinner></faSpinner>
+      return <FaSpinner></FaSpinner>
     }
     
     return (
@@ -46,7 +46,7 @@ const PopularClasses = () => {
          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-10 container mx-auto">
                     {
                       classes.sort((a, b) => b.NOS-a.NOS).slice(0,6).map(clas => (
-                        <Rotate>
+                        <Rotate key={clas._id}>
                           <div className="card  bg-slate-500 shadow-xl text-white rounded">
                         <figure className="px-10 pt-10">
                           <img src={clas.image} className='h-[200px] md:h[300px]'/>

@@ -11,6 +11,8 @@ import {
     GithubAuthProvider,
 } from "firebase/auth";
 import Swal from "sweetalert2";
+import SectionTitle from "../../Title/SectionTitle";
+import axios from "axios";
 
 const Register = () => {
     const [msg, setMsg] = useState("");
@@ -36,6 +38,7 @@ const location=useLocation()
                     })
                     .then((res) => res.json())
                     .then((data) => {
+                        console.log(data)
                         if (data.insertedId) {
                            nevigate(from);
                             Swal.fire({
@@ -51,7 +54,8 @@ const location=useLocation()
                
             })
             .then((error) => {
-                console.log(error);
+
+                nevigate(from)
             });
     };
 
@@ -66,7 +70,7 @@ const location=useLocation()
         const password = data.password;
         const email = data.email;
         const photoURL = data.photoURL;
-        console.log(name, password, email, photoURL);
+        // console.log(name, password, email, photoURL);
         if (data.password !== data.cofirmPassword) {
             return setMsg("Password not matched");
         }
@@ -76,27 +80,45 @@ const location=useLocation()
                 const createdUser = result.user;
                 updateUserProfile(name, photoURL).then(() => {
                     const saveUser = { name, email, photoURL, role:"Student" };
-                    fetch(`https://as-12.vercel.app/users`, {
-                        method: "POST",
-                        headers: {
-                            "content-type": "application/json",
-                        },
-                        body: JSON.stringify(saveUser),
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            if (data.insertedId) {
-                                reset();
-                                Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: "User created successfully.",
-                                    showConfirmButton: false,
-                                    timer: 1500,
-                                });
-                            }
-                        });//then data
+                    // fetch(`https://as-12.vercel.app/users`, {
+                    //     method: "POST",
+                    //     headers: {
+                    //         "content-type": "application/json",
+                    //     },
+                    //     body: JSON.stringify(saveUser),
+                    // })
+                    //     .then((res) => res.json())
+                    //     .then((data) => {
+                    //         console.log(data)
+                    //         if (data.insertedId) {
+                    //           nevigate(from)
+                    //             Swal.fire({
+                    //                 position: "center",
+                    //                 icon: "success",
+                    //                 title: "User created successfully.",
+                    //                 showConfirmButton: false,
+                    //                 timer: 1500,
+                    //             });
+                    //         }
+                    //         else{
+                    //             // nevigate(from)
+                    //         }
+                    //     });//then data
 
+                    axios.post('https://as-12.vercel.app/users', saveUser)
+                    .then(res => {
+                        console.log(res.data.insertedId);
+                        if (res.data.insertedId) {
+                          Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Registrion success',
+                            showConfirmButton: false,
+                            timer: 2500
+                          })
+                          nevigate(from)
+                        }
+                    })
                 }); //update
 
                 console.log(createdUser);
@@ -111,9 +133,7 @@ const location=useLocation()
         <div className="py-5">
             <div className="relative flex flex-col justify-center overflow-hidden ">
                 <div className="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
-                    <h1 className="text-3xl font-semibold text-center text-gray-700">
-                        Sign Up
-                    </h1>
+                  <SectionTitle heading={"Sign Up"}></SectionTitle>
                     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             <div>
@@ -124,18 +144,18 @@ const location=useLocation()
                                     {...register("name", { required: true })}
                                     type="text"
                                     placeholder="Name"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white"
                                 />
                             </div>
                             <div>
                                 <label className="label">
-                                    <span className="text-black abel-text">Email</span>
+                                    <span className="text-black abel-text ">Email</span>
                                 </label>
                                 <input
                                     type="email"
                                     {...register("email", { required: true })}
                                     placeholder="Email Address"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered  text-white"
                                 />
                                 {errors.email?.type === "required" && (
                                     <p className="text-red-600">Email is required</p>
@@ -153,7 +173,7 @@ const location=useLocation()
                                         pattern: /^[a-z0-9]+$/,
                                     })}
                                     placeholder="Enter Password"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered  text-white"
                                 />
                             </div>
                             <div>
@@ -164,7 +184,7 @@ const location=useLocation()
                                     type="password"
                                     {...register("cofirmPassword", { required: true })}
                                     placeholder="Confirm Password"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered  text-white"
                                 />
                                 <p className="text-red-600">{msg}</p>
                             </div>
@@ -192,7 +212,7 @@ const location=useLocation()
                                 type="text"
                                 {...register("photoURL", { required: true })}
                                 placeholder="Photo UR"
-                                className="w-full input input-bordered"
+                                className="w-full input input-bordered  text-white"
                             />
                         </div>
                         <div>

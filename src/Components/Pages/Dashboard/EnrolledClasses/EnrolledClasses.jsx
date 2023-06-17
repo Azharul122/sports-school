@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import axios from 'axios';
+import SectionTitle from '../../../Title/SectionTitle';
 
 const EnrolledClasses = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +27,7 @@ const EnrolledClasses = () => {
 
     return (
         <div className="w-full px-2">
+          <SectionTitle heading={"Enrolled Classes"}></SectionTitle>
         <section>
           <div className="flex text-right  items-center pb-6 text-white">
             <div className="flex gap-2">

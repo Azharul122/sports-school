@@ -41,12 +41,10 @@ const AddClass = () => {
 
   return (
     <div>
-                <SectionTitle heading={"Add New Class"}></SectionTitle>
+              
                 <div className="relative flex flex-col justify-center overflow-hidden ">
                 <div className="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
-                    <h1 className="text-3xl font-semibold text-center text-gray-700">
-                       Add Class
-                    </h1>
+                <SectionTitle heading={"Add New Class"}></SectionTitle>
                     <form className="space-y-4" onSubmit={addClassData}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             <div>

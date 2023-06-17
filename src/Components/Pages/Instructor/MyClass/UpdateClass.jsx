@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import SectionTitle from '../../../Title/SectionTitle';
 
 const UpdateClass = () => {
     const data=useLoaderData()
@@ -51,9 +52,7 @@ const UpdateClass = () => {
 <div>
                 <div className="relative flex flex-col justify-center overflow-hidden ">
                 <div className="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 lg:max-w-xl">
-                    <h1 className="text-3xl font-semibold text-center text-gray-700">
-                       Update
-                    </h1>
+                   <SectionTitle heading={"Update Class"}></SectionTitle>
                     <form className="space-y-4" onSubmit={addClassData}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                             <div>
@@ -65,7 +64,7 @@ const UpdateClass = () => {
                                     name="name"
                                     type="text"
                                     placeholder="Name"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white font-bold"
                                 />
                             </div>
                             <div>
@@ -77,7 +76,7 @@ const UpdateClass = () => {
                                     type="text"
                                     name="image"
                                     placeholder="Email Address"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white font-bold"
                                 />
                           
                             </div>
@@ -90,7 +89,7 @@ const UpdateClass = () => {
                                     type="number"
                                    name="avilableSheets"
                                     placeholder="Avilable Sheets"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white font-bold"
                                 />
                             </div>
                             <div>
@@ -102,7 +101,7 @@ const UpdateClass = () => {
                                     type="number"
                                     name="price"
                                     placeholder="Price"
-                                    className="w-full input input-bordered"
+                                    className="w-full input input-bordered text-white font-bold"
                                 />
                                
                             </div>
