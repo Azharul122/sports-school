@@ -31,6 +31,7 @@ import Payemnt from "./Components/Pages/Dashboard/Payemnt/Payemnt";
 import AdminRoute from "./Components/Routes/AdninRoute/AdminRoute";
 import StudentHome from "./Components/Pages/Dashboard/StudentHome/StudentHome";
 import StudentRoute from "./Components/Routes/StudentRoute/StudentRoute";
+// import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import Error from "./Components/Pages/Error/Error";
 const router = createBrowserRouter([
   {
@@ -63,50 +64,50 @@ const router = createBrowserRouter([
         children: [
           {
             path: "student-home",
-            element: <StudentRoute><StudentHome></StudentHome></StudentRoute>,
+            element: <PrivateRoute><StudentRoute><StudentHome></StudentHome></StudentRoute></PrivateRoute>,
           },
           {
             path: "selected-classes",
-            element:<StudentRoute> <SelectedClasses></SelectedClasses></StudentRoute>,
+            element: <PrivateRoute><StudentRoute><SelectedClasses></SelectedClasses></StudentRoute></PrivateRoute>,
           },
           {
             path: "selected-classes/payment",
-            element: <StudentRoute><Payemnt></Payemnt></StudentRoute>,
+            element: <PrivateRoute><StudentRoute><Payemnt></Payemnt></StudentRoute></PrivateRoute>,
           },
           {
             path: "enrolled-classes",
-            element: <StudentRoute><EnrolledClasses></EnrolledClasses></StudentRoute>,
+            element: <PrivateRoute><StudentRoute><EnrolledClasses></EnrolledClasses></StudentRoute></PrivateRoute>,
           },
                 // ........................................... Instrucror ..............................................................................
           {
             path: "instructor-home",
-            element: <InstructorRoute><InstructorHome></InstructorHome></InstructorRoute>,
+            element: <PrivateRoute><InstructorRoute><InstructorHome></InstructorHome></InstructorRoute></PrivateRoute>
           },
           {
             path: "add-class",
-            element: <InstructorRoute><AddClass></AddClass></InstructorRoute>,
+            element:<PrivateRoute> <InstructorRoute><AddClass></AddClass></InstructorRoute></PrivateRoute>,
           },
           {
             path: "my-classes",
-            element: <InstructorRoute><MyClass></MyClass></InstructorRoute>,
+            element: <PrivateRoute><InstructorRoute><MyClass></MyClass></InstructorRoute></PrivateRoute>,
           },
           {
             path:"my-classes/update-class/:id",
-            element:<InstructorRoute><UpdateClass></UpdateClass></InstructorRoute>,
+            element:<PrivateRoute><InstructorRoute><UpdateClass></UpdateClass></InstructorRoute></PrivateRoute>,
             loader: ({params})=>fetch(`https://as-12.vercel.app/clas/${params.id}`)
           },
           // ............................................. Admin...............................................................
           {
             path:"admin-home",
-            element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+            element:<PrivateRoute><AdminRoute><AdminHome></AdminHome></AdminRoute></PrivateRoute>
           },
           {
             path:"manage-classes",
-            element:<AdminRoute><ManageClasses></ManageClasses></AdminRoute>
+            element:<PrivateRoute><AdminRoute><ManageClasses></ManageClasses></AdminRoute></PrivateRoute>
           },
           {
             path:"manage-users",
-            element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+            element:<PrivateRoute><AdminRoute><ManageUsers></ManageUsers></AdminRoute></PrivateRoute>
           } 
        
        
